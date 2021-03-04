@@ -19,7 +19,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
-	@Autowire
+	@Autowired
 	private DataSource dataSource;
 	
 	@Value("${spring.queries.users-query}")
@@ -29,7 +29,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	private String rolesQuery;
 	
 	@Override 
-	protected void cofigure(AuthenticationManagerBuilder auth) 
+	protected void configure(AuthenticationManagerBuilder auth) 
 	throws Exception {
 		auth.jdbcAuthentication()
 		.usersByUsernameQuery(rolesQuery)
@@ -43,6 +43,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/console/**").permitAll()
         .antMatchers("/login").permitAll()
         .antMatchers("/signup").permitAll()
+        .antMatchers("/feed").permitAll()
         .antMatchers("/custom.js").permitAll()
         .antMatchers("/custom.css").permitAll()
         .antMatchers().hasAuthority("USER").anyRequest()
